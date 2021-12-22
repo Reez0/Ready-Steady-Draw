@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
             case ("Level1"):
                 drawTime = 2f;
                 break;
+            case ("Level2"):
+                drawTime = 1.8f;
+                break;
         }
     }
     void Start()
@@ -92,7 +95,13 @@ public class GameManager : MonoBehaviour
     }
 
     private void NextLevel() {
-        Debug.Log("Going to the next level");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        int sceneNumber = int.Parse(currentSceneName.Replace("Level", ""));
+        int newSceneNumber = sceneNumber+1;
+        string newSceneName = "Level" + newSceneNumber.ToString();
+        SceneManager.LoadScene(newSceneName);
+        
+        
     }
 
     private void RetryLevel() {
