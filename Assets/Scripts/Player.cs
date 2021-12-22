@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public bool hasDrawn = false;
     private UI _ui;
     private AudioSource _audioSource;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,28 +30,33 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (!_gameManager.roundEnd)
         {
-            DrawWeapon();
-        }
-        if (transform.position.x >= -6f)
-        {
-            anim.SetBool("levelStart", false);
-            if (!textShown)
+
+
+            if (Input.GetButton("Fire1"))
             {
-                _ui.ChangeText();
-                textShown = true;
+                DrawWeapon();
+            }
+            if (transform.position.x >= -6f)
+            {
+                anim.SetBool("levelStart", false);
+                if (!textShown)
+                {
+                    _ui.ChangeText();
+                    textShown = true;
+                }
+                else
+                {
+                    Invoke("ResetText", 5f);
+                    _gameManager.Invoke("StartCountDownTimer", 5f);
+
+                }
             }
             else
             {
-                Invoke("ResetText", 5f);
-                _gameManager.Invoke("StartCountDownTimer", 5f);
-
+                transform.position = Vector3.MoveTowards(transform.position, startLocation.transform.position, 3f * Time.deltaTime);
             }
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, startLocation.transform.position, 3f * Time.deltaTime);
         }
     }
 
@@ -76,7 +81,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                 // Player drew after the time
+                // Player drew after the time
                 if (Mathf.Abs(_gameManager.currentTime) > _gameManager.randomNumber)
                 {
                     _audioSource.PlayDelayed(0.1f);

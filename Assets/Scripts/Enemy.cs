@@ -27,32 +27,38 @@ public class Enemy : MonoBehaviour
         Debug.Log("Waiting here...");
         if (enemyDrawReady)
         {
-            if (!hasDrawn) {
-            Debug.Log("ENEMY DRAW => " + _drawTime);
-            _audioSource.PlayDelayed(0.1f);
-            anim.SetTrigger("weaponDraw");
-            _gameManager.playerWins = false;
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<Animator>().SetTrigger("death");
-            hasDrawn = true;
-            } else {
-                Invoke("ResetTrigger",0.5f);
+            if (!hasDrawn)
+            {
+                Debug.Log("ENEMY DRAW => " + _drawTime);
+                _audioSource.PlayDelayed(0.1f);
+                anim.SetTrigger("weaponDraw");
+                _gameManager.playerWins = false;
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<Animator>().SetTrigger("death");
+                hasDrawn = true;
+            }
+            else
+            {
+                Invoke("ResetTrigger", 0.5f);
             }
 
         }
     }
 
-        void SetEnemyDraw() {
-            Debug.Log("Here is player wins => " + _gameManager.playerWins);
-        if (_gameManager.playerWins == null || _gameManager.playerWins == false) {
-            
-                enemyDrawReady = true;
+    void SetEnemyDraw()
+    {
+        Debug.Log("Here is player wins => " + _gameManager.playerWins);
+        if (_gameManager.playerWins == null || _gameManager.playerWins == false)
+        {
+
+            enemyDrawReady = true;
         }
 
     }
 
-    void ResetTrigger(){
-    anim.ResetTrigger("weaponDraw");
+    void ResetTrigger()
+    {
+        anim.ResetTrigger("weaponDraw");
     }
 
 }

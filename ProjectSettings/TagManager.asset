@@ -10,6 +10,9 @@ TagManager:
   - Enemy
   - ResultText
   - DrawAudio
+  - NextLevel
+  - TryAgain
+  - Canvas
   layers:
   - Default
   - TransparentFX
