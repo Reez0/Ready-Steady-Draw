@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
-    public string[] sentences = {
+    private readonly string[] sentences = {"I'm gonna pump ya' full of lead.",
+        "If somebody outdraws you boy, walk away. There's plenty o' time to look tough when your outta' sight",
+        "Tellin' a man to git lost and makin' him do it are two entirely different propositions.",
+        "Don't worry - I've been in tighter spots than this.",
+        "Being silent, may be your best answer.",
         "Dying ain't much of a living, boy.",
         "Go ahead, make my day.",
         "Ever notice how you come across somebody once in a while you shouldn't have f***ed with? That's me.",
@@ -15,7 +19,6 @@ public class UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -50,6 +53,7 @@ public class UI : MonoBehaviour
 
     public void ShowDrawText() {
         GameObject drawText = GameObject.FindGameObjectsWithTag("DrawText")[0];
+        
         drawText.GetComponent<Text>().text = "DRAW";
     }
 

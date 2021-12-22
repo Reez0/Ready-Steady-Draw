@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       randomNumber = Random.Range(1,10);
+       randomNumber = Random.Range(1,7);
        _ui = gameObject.GetComponent<UI>();
        _audioSource = gameObject.GetComponent<AudioSource>();
     }
