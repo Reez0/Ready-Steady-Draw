@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private float _drawTime;
     public bool hasDrawn = false;
     private UI _ui;
+    private AudioSource _audioSource;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         _gameManager = gm.GetComponent<GameManager>();
         _drawTime = _gameManager.drawTime;
         _ui = gameObject.GetComponent<UI>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
 
     void DrawWeapon()
     {
+
         if (!hasDrawn)
         {
             hasDrawn = true;
@@ -67,12 +70,16 @@ public class Player : MonoBehaviour
             if (Mathf.Abs(_gameManager.currentTime) <= _gameManager.randomNumber)
             {
                 _ui.ShowJammedText();
+                var clip = Resources.Load<AudioClip>("Sounds/jam");
+                _audioSource.PlayOneShot(clip);
+                anim.SetTrigger("panicked");
             }
             else
             {
                  // Player drew after the time
                 if (Mathf.Abs(_gameManager.currentTime) > _gameManager.randomNumber)
                 {
+                    _audioSource.PlayDelayed(0.1f);
                     Debug.Log("You drew on => " + _gameManager.currentTime);
                     anim.SetTrigger("weaponDraw");
                     _gameManager.playerWins = true;
@@ -87,6 +94,8 @@ public class Player : MonoBehaviour
         {
             // Debug.Log("Your weapon has jammed!");
             // Shooting animation for enemy
+            // var clip = Resources.Load<AudioClip>("Sounds/jam");
+            // _audioSource.PlayOneShot(clip);
         }
     }
 }

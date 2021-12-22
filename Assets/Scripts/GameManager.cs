@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private UI _ui;
     public bool roundEnd = false;
 
+    private AudioSource _audioSource;
+
     private void Awake() {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
        randomNumber = Random.Range(1,10);
        _ui = gameObject.GetComponent<UI>();
+       _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -34,11 +37,16 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Enemy wins!");
                 // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 _ui.ShowResultWinText(false);
+                var clip =  Resources.Load<AudioClip>("Sounds/lose");
+                StartCoroutine(PlayResultSound(clip));
                 roundEnd = true;
             } else if (playerWins == true) {
                 Debug.Log("Player wins!");
                 _ui.ShowResultWinText(true);
+                var clip =  Resources.Load<AudioClip>("Sounds/win");
+                StartCoroutine(PlayResultSound(clip));
                 roundEnd = true;
+                
                 // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -56,6 +64,11 @@ public class GameManager : MonoBehaviour
             Enemy enemyGameObject = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
             enemyGameObject.Invoke("SetEnemyDraw", drawTime);
         }
+    }
+
+    IEnumerator PlayResultSound(AudioClip clip) {
+        yield return new WaitForSeconds(0.5f);
+        _audioSource.PlayOneShot(clip);
     }
     
 }

@@ -4,11 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
-    public string[] sentences = {"I'm gonna pump ya' full of lead.",
-        "If somebody outdraws you boy, walk away. There's plenty o' time to look tough when your outta' sight",
-        "Tellin' a man to git lost and makin' him do it are two entirely different propositions.",
-        "Don't worry - I've been in tighter spots than this.",
-        "Being silent, may be your best answer.",
+    public string[] sentences = {
         "Dying ain't much of a living, boy.",
         "Go ahead, make my day.",
         "Ever notice how you come across somebody once in a while you shouldn't have f***ed with? That's me.",

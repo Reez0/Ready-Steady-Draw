@@ -11,12 +11,14 @@ public class Enemy : MonoBehaviour
     public bool hasDrawn = false;
     public bool enemyDrawReady = false;
     private Animator anim;
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
         _gameManager = gm.GetComponent<GameManager>();
         _drawTime = _gameManager.drawTime;
         anim = gameObject.GetComponent<Animator>();
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
         {
             if (!hasDrawn) {
             Debug.Log("ENEMY DRAW => " + _drawTime);
+            _audioSource.PlayDelayed(0.1f);
             anim.SetTrigger("weaponDraw");
             _gameManager.playerWins = false;
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -34,7 +37,6 @@ public class Enemy : MonoBehaviour
             hasDrawn = true;
             } else {
                 Invoke("ResetTrigger",0.5f);
-                
             }
 
         }
