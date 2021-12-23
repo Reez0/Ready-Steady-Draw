@@ -24,11 +24,36 @@ public class GameManager : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case ("Level1"):
-                drawTime = 1.5f;
+                drawTime = 1f;
                 break;
             case ("Level2"):
-                drawTime = 1.3f;
+                drawTime = 0.85f;
                 break;
+            case ("Level3"):
+                drawTime = 0.7f;
+                break;
+            case ("Level4"):
+                drawTime = 0.65f;
+                break;
+            case ("Level5"):
+                drawTime = 0.5f;
+                break;
+            case ("Level6"):
+                drawTime = 0.45f;
+                break;
+            case ("Level7"):
+                drawTime = 0.35f;
+                break;
+            case ("Level8"):
+                drawTime = 0.30f;
+                break;
+            case ("Level9"):
+                drawTime = 0.29f;
+                break;
+            case ("Level10"):
+                drawTime = 0.27f;
+                break;
+
         }
     }
     void Start()
@@ -49,7 +74,7 @@ public class GameManager : MonoBehaviour
             if (playerWins == false)
             {
                 Debug.Log("Enemy wins!");
-                
+
                 _ui.ShowResultWinText(false);
                 var clip = Resources.Load<AudioClip>("Sounds/lose");
                 StartCoroutine(PlayResultSound(clip));
@@ -96,18 +121,20 @@ public class GameManager : MonoBehaviour
         _audioSource.PlayOneShot(clip);
     }
 
-    private void NextLevel() {
+    private void NextLevel()
+    {
         Debug.Log("Clicked!");
         string currentSceneName = SceneManager.GetActiveScene().name;
         int sceneNumber = int.Parse(currentSceneName.Replace("Level", ""));
-        int newSceneNumber = sceneNumber+1;
+        int newSceneNumber = sceneNumber + 1;
         string newSceneName = "Level" + newSceneNumber.ToString();
         SceneManager.LoadScene(newSceneName);
-        
-        
+
+
     }
 
-    private void RetryLevel() {
+    private void RetryLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
