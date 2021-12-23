@@ -20,23 +20,25 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Awake called!");
         switch (SceneManager.GetActiveScene().name)
         {
             case ("Level1"):
-                drawTime = 2f;
+                drawTime = 1.5f;
                 break;
             case ("Level2"):
-                drawTime = 1.8f;
+                drawTime = 1.3f;
                 break;
         }
     }
     void Start()
     {
+        Debug.Log("Start called!");
         randomNumber = Random.Range(1, 7);
         _ui = gameObject.GetComponent<UI>();
         _audioSource = gameObject.GetComponent<AudioSource>();
-        nextLevelBtn.GetComponent<Button>().onClick.AddListener(NextLevel);
-        tryAgainBtn.GetComponent<Button>().onClick.AddListener(RetryLevel);
+        nextLevelBtn.GetComponentInChildren<Button>().onClick.AddListener(NextLevel);
+        tryAgainBtn.GetComponentInChildren<Button>().onClick.AddListener(RetryLevel);
     }
 
     void Update()
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void NextLevel() {
+        Debug.Log("Clicked!");
         string currentSceneName = SceneManager.GetActiveScene().name;
         int sceneNumber = int.Parse(currentSceneName.Replace("Level", ""));
         int newSceneNumber = sceneNumber+1;
